@@ -3,10 +3,12 @@ var express = require('express');
 var app = express();
 var CronJob = require('cron').CronJob;
 
+var num;
+
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(req, res) {
-  res.send('derp');
+  res.send(num.toString());
 });
 
 app.listen(app.get('port'), function() {
@@ -24,6 +26,7 @@ var job = new CronJob({
 
       fs.writeFile(log, count, function (err) {
         if (err) return console.log(err);
+        num = count;
         console.log(count);
       });
     });
