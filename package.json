@@ -1,0 +1,19 @@
+{
+  "name": "node-cron-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Victor Hoang",
+  "license": "MIT",
+  "dependencies": {
+    "cron": "^1.0.9",
+    "express": "^4.13.3"
+  },
+  "engines": {
+    "node": "4.2.1",
+    "npm": "3.3.8"
+  }
+}
