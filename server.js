@@ -6,9 +6,11 @@ var CronJob = require('cron').CronJob;
 var num = 0;
 
 app.set('port', (process.env.PORT || 5000));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-  res.send(num.toString());
+  res.render('index', { num: num });
 });
 
 app.listen(app.get('port'), function() {
