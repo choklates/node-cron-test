@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var CronJob = require('cron').CronJob;
 
-var num;
+var num = 0;
 
 app.set('port', (process.env.PORT || 5000));
 
