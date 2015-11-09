@@ -1,8 +1,12 @@
-var fs = require('fs');
-var express = require('express');
-var app = express();
-var CronJob = require('cron').CronJob;
+var fs           = require('fs');
+var express      = require('express');
+var app          = express();
+var http         = require('http').Server(app);
+var io           = require('socket.io')(http);
+var CronJob      = require('cron').CronJob;
+var EventEmitter = require('events').EventEmitter;
 
+var emitter = new EventEmitter();
 var num = 0;
 
 app.set('port', (process.env.PORT || 5000));
@@ -13,7 +17,11 @@ app.get('/', function(req, res) {
   res.render('index', { num: num });
 });
 
-app.listen(app.get('port'), function() {
+emitter.on('tick', function() {
+  io.emit('message', num);
+});
+
+http.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
@@ -29,7 +37,7 @@ var job = new CronJob({
       fs.writeFile(log, count, function (err) {
         if (err) return console.log(err);
         num = count;
-        console.log(count);
+        emitter.emit('tick');
       });
     });
   },
