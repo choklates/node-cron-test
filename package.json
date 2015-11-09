@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "prestart": "touch count.txt",
     "start": "node server.js"
   },
   "author": "Victor Hoang",
